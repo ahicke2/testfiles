@@ -1,0 +1,165 @@
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <style>
+    .navbar {
+      margin-bottom: 0px;
+    }
+    .wrapper {
+      text-align: center;
+    }
+
+    .button {
+      position: absolute;
+      top: 50%;
+    }
+    .jumbotron {
+      padding: 20px;
+      margin-top: 20px;
+    }
+  </style>
+
+  <!--randomizer script-->
+  <script type="text/javascript">
+    function scramble() {
+      var txt=document.getElementById('rlines').value;
+      if (document.getElementById('leadingblanks').checked==true) { var leadingblanks="nolb"; }
+      txt = txt.replace(new RegExp( ">", "g" ), "&gt;");
+      txt = txt.replace(new RegExp( "<", "g" ), "&lt;");
+      txt = txt.replace(new RegExp( "\t", "g" ), "    ");
+      var lineArray = new Array();
+      lineArray = txt.split('\n');
+      var noBlanks = new Array();
+      for ( var i in lineArray ) {
+       if (lineArray[i].match(/\S/)) {
+         if ((lineArray[i].match(/^\s+/)) && (leadingblanks != "nolb")) {
+           var blen = lineArray[i].match(/^\s+/).join().length;
+           var t = '';
+           for (n=0;n<=blen;n++) {
+             t = t + '&nbsp;';
+           }
+           lineArray[i] = lineArray[i].replace(new RegExp( "^ +", "g" ), "");
+           lineArray[i] = t + lineArray[i];
+         }
+         else {
+           lineArray[i] = lineArray[i].replace(new RegExp( "^ +", "g" ), "");
+         }
+         noBlanks[i] = Math.random() + ' <~|~> ' + lineArray[i];
+       }
+     }
+
+     noBlanks.sort();
+     var tmp = new Array();
+     for ( var ln in noBlanks ) {
+      var tmp = noBlanks[ln].split(" <~|~> ");
+      noBlanks[ln] = tmp[1];
+    }
+
+    var thelist = noBlanks.join("<br />\n");
+    document.getElementById('output').innerHTML=thelist;
+    window.location = "#startresults";
+  }
+
+  function onoff(x) {
+    if (x == 'on') {
+      document.getElementById('onoffon').style.display="none";
+      document.getElementById('onoffoff').style.display="block";
+      document.getElementById('example').style.display="block";
+    }
+    else if (x == 'off') {
+      document.getElementById('onoffoff').style.display="none";
+      document.getElementById('onoffon').style.display="block";
+      document.getElementById('example').style.display="none";
+    }
+  }
+
+</script>
+<!--randomizer script end-->
+
+</head>
+<body background="http://www.pulsarwallpapers.com/data/media/3/Alien%20Ink%202560X1600%20Abstract%20Background.jpg">
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">RANDOMIZER</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Phone App</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Other Apps <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <div class="container">
+    <div class="jumbotron">
+      <h1><img src="http://www.tapeshow.com/chores/chores_logo.png" width="160" height="150" />Chore Randomizer</h1>
+      <p>Having problems allocating chores to people?  Randomize it here, argument free!</p>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>List Persons</h2>
+        <div>
+          <textarea class="form-control" rows="10" id="textArea"></textarea></div>
+        </div>
+        <div class="col-md-6">
+          <h2>List Chores</h2>
+          <div>
+            <textarea class="form-control" rows="10" id="textArea"></textarea>
+          </div>
+        </div>
+      </div>
+      <h2> </h2>
+      <div class="row">
+        <div class="wrapper">
+          <p id="demo" onclick="myFunction()"> <button type="button" class="btn btn-default btn-lg" style="width:260px;height:100px;">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true" onclick="scramble(textarea class="form-control")"></span> Scramble</p>
+
+            <script>
+              function myFunction() {
+                document.getElementById("demo").innerHTML = "Not sure how to make this work";
+              }
+            </script>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+
+<!--SELF NOTES-->
+<!--Button randomize left X and right Y column-->
+<!--Y divisible by X double up-->
+<!--SELF NOTES-->
+<!--SELF NOTES-->
+<!--SELF NOTES-->
+<!--SELF NOTES-->
